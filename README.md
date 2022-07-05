@@ -1,12 +1,12 @@
-###################
-Bot Whatsapp Api auto send message INDONESIA
-###################
+
+# Bot Whatsapp Api auto send message INDONESIA
+
 
 Bot Whatsapp Berbaasis Node.js implementasi untuk api web
 
-*******************
-Comptible with
-*******************
+
+## Comptible with
+
 
 > CodeIgniter
 > Laravel
@@ -14,17 +14,17 @@ Comptible with
 > MERN
 
 
-************
-Installation
-************
+
+## Installation
+
 
 The module is now available on npm! `npm i whatsapp-web.js`
 
 Please note that Node v12+ is required.
 
-************
-Example Use
-************
+
+## Example Use
+
 
 ```js
 const { Client } = require('whatsapp-web.js');
@@ -49,16 +49,16 @@ client.on('message', msg => {
 client.initialize();
 ```
 
-*******
-License
-*******
+
+## License
+
 
 Please see the `license
 agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
 
-*********
-Fitures
-*********
+
+## Fitures
+
 
 
 | Feature  | Status |
