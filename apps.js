@@ -35,7 +35,6 @@ client.on('authenticated', () => {
     console.log('AUTHENTICATED');
 });
 client.on('auth_failure', msg => {
-    // Fired if session restore was unsuccessful 
     console.error('AUTHENTICATION FAILURE', msg);
 });
 
@@ -51,24 +50,78 @@ app.post('/kirim', async (req, res) => {
     let nama = generateRandomString(10)
     let url = req.body.link
     
-        // res.send(peslet sessionData;a
-    res.send(req.body)
-    const response = await fetch(url);
-    const buffer = await response.buffer();
+    var phoneno = /^(62)8[1-9][0-9]{6,10}$/;
+    if(nomer.match(phoneno)) {
+        const response = await fetch(url);
+        const buffer = await response.buffer();
         fs.writeFile('./image/'+nama+'.jpg', buffer, () => {
             let media = MessageMedia.fromFilePath('./image/'+nama+'.jpg')
             client.sendMessage(nomer + "@c.us", media, { caption: pesan })
-            console.log('finished downloading!')});
+            console.log('finished downloading!')
+        
+            try {
+                fs.unlinkSync('./image/'+nama+'.jpg')
+                //file removed
+              } catch(err) {
+                console.error(err)
+              }
+        });
+        // res.send(req.body)
+        res.json({status:'sukses'})
+      console.log('sukses')
+    }  
+    else {  
+        console.log('gagal')
+        res.send('gagal')
+    }
+        
+    
+    
 
     // const media = await MessageMedia.fromUrl('https://www.iasgurukul.com/images/abhinav.png',);
 
 
-    // //console.log(req.body)
     console.log(nomer + "@c.us")
     console.log(pesan)
     console.log(url)
-    // res.sendStatus(200);
 })
+
+app.post('/kirimpdf', async (req, res) => {
+
+    let pesan = req.body.pesan
+    let nomer = req.body.nomer
+    let nama = generateRandomString(10)
+    let url = req.body.link
+    
+    var phoneno = /^(62)8[1-9][0-9]{6,10}$/;
+    if(nomer.match(phoneno)) {
+        const response = await fetch(url);
+        const buffer = await response.buffer();
+        fs.writeFile('./pdf/'+nama+'.pdf', buffer, () => {
+            let media = MessageMedia.fromFilePath('./pdf/'+nama+'.pdf')
+            client.sendMessage(nomer + "@c.us", media, { caption: pesan })
+            console.log('finished downloading!')
+        
+            try {
+                fs.unlinkSync('./pdf/'+nama+'.pdf')
+              } catch(err) {
+                console.error(err)
+              }
+        });
+        // res.send(req.body)
+        res.json({status:'sukses'})
+      console.log('sukses')
+    }  
+    else {  
+        console.log('gagal')
+        res.send('gagal')
+    }
+        
+    console.log(nomer + "@c.us")
+    console.log(pesan)
+    console.log(url)
+})
+
 
 app.listen(port, () => {
         
